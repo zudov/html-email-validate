@@ -78,13 +78,3 @@ label = do
     lbl <- intercalate "-" <$> takeWhile1 (inClass "A-Za-z0-9") `sepBy1` char '-'
     when (T.length lbl > 63) $ fail "Label is too long"
     return lbl
-
-{-
-label = scan 0
-    -- More advanced. Fails when the length of 63 is reached
-    where scan ctr = do
-              p <- letDigs
-              let ctr' = ctr + T.length p
-              when (ctr' > 63) $ fail "Label is too long"
-              option p (char '-' *> ((T.append p . T.cons '-') <$> scan (ctr' + 1)))
--}
