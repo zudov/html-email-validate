@@ -1,0 +1,5 @@
+dist/
+Setup.hs
+.cabal-sandbox/
+cabal.sandbox.config
+*.sw[pno]
