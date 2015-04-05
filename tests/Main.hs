@@ -34,6 +34,7 @@ main = hspec $ do
 testEmail email = (isValidEmail $ pack email) `shouldBe` validateEmailRegex email
             
 
+validateEmailRegex :: String -> Bool
 validateEmailRegex email
     | any (== '\n') email = False -- For some reason when using Text.Regex.PCRE
                                   -- the javascript regex matches '\n' even 
