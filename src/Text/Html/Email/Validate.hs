@@ -14,6 +14,7 @@ module Text.Html.Email.Validate
 
 import           Control.Applicative
 import           Control.Monad (when)
+import           Data.Either (isRight)
 import           Data.Text (Text, intercalate)
 import qualified Data.Text as T
 import           Data.Attoparsec.Text
@@ -56,7 +57,7 @@ emailToText = TS.show
 --   >>> isValidEmail "name@example..com"
 --   False
 isValidEmail :: Text -> Bool
-isValidEmail = either (const False) (const True) . parseEmail
+isValidEmail = isRight . parseEmail
 
 -- | Parce an email. Error messages aren't very helpful.
 parseEmail :: Text -> Either String EmailAddress
