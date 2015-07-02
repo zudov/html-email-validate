@@ -1,5 +1,5 @@
 name:                html-email-validate
-version:             0.1.0.0
+version:             0.2.0.0
 synopsis:            Validating an email address against HTML standard
 description:         The library allows to validate and parse an email address
                      as it's defined in <https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address HTML standard>.
@@ -24,7 +24,6 @@ library
                        DeriveGeneric
   
   build-depends:       base >=4.7 && <5.0
-                     , text-show
                      , attoparsec
                      , text
                    

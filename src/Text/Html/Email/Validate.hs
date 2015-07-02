@@ -22,7 +22,6 @@ import           Data.Monoid ((<>))
 import qualified Text.Read as Read
 import           Data.Data (Data, Typeable)
 import           GHC.Generics (Generic)
-import qualified Text.Show.Text as TS
 
 -- | Represents an email address
 data EmailAddress = EmailAddress { localPart  :: Text
@@ -30,7 +29,7 @@ data EmailAddress = EmailAddress { localPart  :: Text
                                  } deriving (Eq, Ord, Data, Typeable, Generic)
 
 instance Show EmailAddress where
-    show = TS.toString . TS.showb
+    show = T.unpack . emailToText
 
 instance Read EmailAddress where
     readListPrec = Read.readListPrecDefault
@@ -38,16 +37,12 @@ instance Read EmailAddress where
         text <- Read.readPrec
         either (const Read.pfail) return $ parseOnly emailParser text
 
-instance TS.Show EmailAddress where
-    showb EmailAddress{..} = TS.fromText localPart <> TS.singleton '@' <> TS.fromText domainPart
-
--- | Convert to text. Note that 'EmailAddress' has an instance of 'TS.Show' from
---   'text-show', you might want to use it instead.
+-- | Convert to text.
 --
 --   >>> emailToText $ EmailAddress "name" "example.com"
 --   "name@example.com
 emailToText :: EmailAddress -> Text
-emailToText = TS.show
+emailToText EmailAddress{..} = localPart <> T.singleton '@' <> domainPart
 
 -- | Validates given email. Email shouldn't have trailing or preceding spaces
 --  
