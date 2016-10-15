@@ -1,5 +1,1 @@
-dist/
-Setup.hs
-.cabal-sandbox/
-cabal.sandbox.config
-*.sw[pnolm]
+.stack-work/
