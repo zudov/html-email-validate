@@ -1,0 +1,47 @@
+name: html-email-validate
+version: '0.2.0.0'
+github: zudov/html-email-validate
+synopsis: Validating an email address against HTML standard
+description: !
+  'The library allows to validate and parse an email address as it''s defined in <https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address HTML standard>.
+
+
+
+  Note that HTML specification of a valid email address is a ''willful violation'' of RFC 5322. If you want to validate an address against RFC 5322 you should use <https://hackage.haskell.org/package/email-validate email-validate>.'
+category: Text
+author: Konstantin Zudov <co@zudov.me>
+maintainer: Konstantin zudov <co@zudov.me>
+copyright: (c) Konstantin Zudov, 2015, 2016
+license: BSD3
+dependencies:
+- base >=4.7 && <5.0
+- text
+library:
+  source-dirs: src/
+  other-extensions:
+  - OverloadedStrings
+  - RecordWildCards
+  - DeriveDataTypeable
+  - DeriveGeneric
+  ghc-options: -Wall
+  exposed-modules:
+  - Text.Html.Email.Validate
+  dependencies:
+  - attoparsec
+tests:
+  test:
+    main: Main.hs
+    source-dirs: tests/
+    dependencies:
+    - attoparsec
+    - hspec
+    - regex-pcre-builtin
+    - html-email-validate
+    - QuickCheck
+benchmarks:
+  bench:
+    main: Main.hs
+    source-dirs: bench
+    dependencies:
+    - html-email-validate
+    - criterion
