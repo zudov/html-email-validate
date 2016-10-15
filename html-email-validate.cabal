@@ -9,9 +9,9 @@ description:         The library allows to validate and parse an email address
                      an address against RFC 5322 you should use <https://hackage.haskell.org/package/email-validate email-validate>.
 license:             BSD3
 license-file:        LICENSE
-author:              Konstantin Zudov
-maintainer:          konstantin@anche.no
-copyright:           (c) Konstantin Zudov, 2015
+author:              Konstantin Zudov <co@zudov.me>
+maintainer:          Konstantin zudov <co@zudov.me>
+copyright:           (c) Konstantin Zudov, 2015, 2016
 category:            Text
 build-type:          Simple
 cabal-version:       >=1.10
