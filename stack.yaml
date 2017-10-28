@@ -1,1 +1,5 @@
 resolver: lts-9.10
+nix:
+  enable: false
+  packages:
+  - binutils # provides 'strip'
