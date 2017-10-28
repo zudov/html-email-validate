@@ -12,6 +12,15 @@ Validating an email address against HTML standard.
 [hackage-badge]: https://img.shields.io/hackage/v/html-email-validate.svg
 [hackage-page]: https://hackage.haskell.org/package/html-email-validate
 
+[![Stackage LTS][stackage-lts-badge]][stackage-lts-page] \
+[![Stackage Nightly][stackage-nightly-badge]][stackage-nightly-page]
+
+[stackage-lts-badge]: https://www.stackage.org/package/html-email-validate/badge/lts
+[stackage-lts-page]: https://www.stackage.org/lts/package/html-email-validate
+
+[stackage-nightly-badge]: https://www.stackage.org/package/html-email-validate/badge/nightly
+[stackage-nightly-page]: https://www.stackage.org/nightly/package/html-email-validate
+
 The library allows to validate and parse an email address
 as it's defined in [HTML standard](https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address).
 
