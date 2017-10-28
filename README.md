@@ -4,16 +4,15 @@ Validating an email address against HTML standard.
 
 [![Travis][travis-badge]][travis-page]
 
+[![Hackage][hackage-badge]][hackage-page]
+[![Stackage LTS][stackage-lts-badge]][stackage-lts-page]
+[![Stackage Nightly][stackage-nightly-badge]][stackage-nightly-page]
+
 [travis-badge]: https://travis-ci.org/zudov/html-email-validate.svg?branch=master
 [travis-page]: https://travis-ci.org/zudov/html-email-validate
 
-[![Hackage][hackage-badge]][hackage-page]
-
 [hackage-badge]: https://img.shields.io/hackage/v/html-email-validate.svg
 [hackage-page]: https://hackage.haskell.org/package/html-email-validate
-
-[![Stackage LTS][stackage-lts-badge]][stackage-lts-page] \
-[![Stackage Nightly][stackage-nightly-badge]][stackage-nightly-page]
 
 [stackage-lts-badge]: https://www.stackage.org/package/html-email-validate/badge/lts
 [stackage-lts-page]: https://www.stackage.org/lts/package/html-email-validate
