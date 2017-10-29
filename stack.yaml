@@ -3,3 +3,5 @@ nix:
   enable: false
   packages:
   - binutils # provides 'strip'
+  - ncurses
+  - gcc
