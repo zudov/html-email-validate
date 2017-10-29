@@ -1,7 +1,7 @@
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 module Text.Html.Email.Validate
     ( -- * Validating
       isValidEmail
@@ -13,39 +13,43 @@ module Text.Html.Email.Validate
     ) where
 
 import           Control.Applicative
-import           Control.Monad (when)
-import           Data.Either (isRight)
-import           Data.Text (Text, intercalate)
-import qualified Data.Text as T
+import           Control.Monad        (when)
 import           Data.Attoparsec.Text
-import           Data.Monoid ((<>))
-import qualified Text.Read as Read
-import           Data.Data (Data, Typeable)
-import           GHC.Generics (Generic)
+import           Data.Data            (Data, Typeable)
+import           Data.Either          (isRight)
+import           Data.Monoid          ((<>))
+import           Data.Text            (Text)
+import qualified Data.Text            as Text
+import           GHC.Generics         (Generic)
+import qualified Text.Read            as Read
 
 -- | Represents an email address
-data EmailAddress = EmailAddress { localPart  :: Text
-                                 , domainPart :: Text 
-                                 } deriving (Eq, Ord, Data, Typeable, Generic)
+data EmailAddress = EmailAddress
+  { localPart  :: Text
+  , domainPart :: Text
+  } deriving (Eq, Ord, Data, Typeable, Generic)
 
 instance Show EmailAddress where
-    show = T.unpack . emailToText
+  show = Text.unpack . emailToText
 
 instance Read EmailAddress where
-    readListPrec = Read.readListPrecDefault
-    readPrec = Read.parens $ do
-        text <- Read.readPrec
-        either (const Read.pfail) return $ parseOnly emailParser text
+  readListPrec = Read.readListPrecDefault
+  readPrec = Read.parens $ do
+    text <- Read.readPrec
+    case parseEmail text of
+      Right email -> pure email
+      Left  _err  -> Read.pfail
 
 -- | Convert to text.
 --
 --   >>> emailToText $ EmailAddress "name" "example.com"
 --   "name@example.com
 emailToText :: EmailAddress -> Text
-emailToText EmailAddress{..} = localPart <> T.singleton '@' <> domainPart
+emailToText EmailAddress{..} =
+  localPart <> Text.singleton '@' <> domainPart
 
 -- | Validates given email. Email shouldn't have trailing or preceding spaces
---  
+--
 --   >>> :set -XOverloadedStrings
 --   >>> isValidEmail "name@example.com"
 --   True
@@ -60,17 +64,21 @@ parseEmail = parseOnly emailParser
 
 -- | Attoparsec parser.
 emailParser :: Parser EmailAddress
-emailParser = EmailAddress <$> (local <* char '@') 
-                           <*> (domain <* endOfInput)
-    
+emailParser =
+  EmailAddress
+    <$> (local  <* char '@')
+    <*> (domain <* endOfInput)
+
 local :: Parser Text
-local = takeWhile1 (inClass "A-Za-z0-9!#$%&'*+/=?^_`{|}~.-")
+local =
+  takeWhile1 (inClass "A-Za-z0-9!#$%&'*+/=?^_`{|}~.-")
 
 domain :: Parser Text
-domain = intercalate "." <$> label `sepBy1` char '.'
+domain =
+  Text.intercalate "." <$> label `sepBy1` char '.'
 
 label :: Parser Text
 label = do
-    lbl <- intercalate "-" <$> takeWhile1 (inClass "A-Za-z0-9") `sepBy1` char '-'
-    when (T.length lbl > 63) $ fail "Label is too long"
-    return lbl
+  lbl <- Text.intercalate "-" <$> takeWhile1 (inClass "A-Za-z0-9") `sepBy1` char '-'
+  when (Text.length lbl > 63) $ fail "Label is too long"
+  pure lbl
