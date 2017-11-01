@@ -43,7 +43,7 @@ instance Read EmailAddress where
 -- | Convert to text.
 --
 --   >>> emailToText $ EmailAddress "name" "example.com"
---   "name@example.com
+--   "name@example.com"
 emailToText :: EmailAddress -> Text
 emailToText EmailAddress{..} =
   localPart <> Text.singleton '@' <> domainPart
