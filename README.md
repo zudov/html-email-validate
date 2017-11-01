@@ -27,4 +27,17 @@ Note that HTML specification of a valid email address is a
 'willful violation' of RFC 5322. If you want to validate
 an address against RFC 5322 you should use [email-validate](https://hackage.haskell.org/package/email-validate).
 
-For usage see [documentation on Hackage](https://hackage.haskell.org/package/html-email-validate/docs/Text-Html-Email-Validate.html).
+## Usage
+
+```haskell
+
+Prelude> import Text.Html.Email.Validate 
+Prelude Text.Html.Email.Validate> :set -XOverloadedStrings 
+Prelude Text.Html.Email.Validate> isValidEmail "mailto@@mail.to"
+False
+Prelude Text.Html.Email.Validate> parseEmail "mailto@mail.to"
+Right mailto@mail.to
+
+```
+
+For more examples see [documentation on Hackage](https://hackage.haskell.org/package/html-email-validate/docs/Text-Html-Email-Validate.html).
